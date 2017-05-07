@@ -46,12 +46,12 @@ def on_connect(mqttc, obj, rc):
 
 def on_message(mqttc, obj, msg):
     print("msg: " + str(msg.payload) + " at topic: " + msg.topic + " with QoS: " + str(msg.qos))
-    if(str(msg.payload) == "master"):
+    if(str(msg.payload) == "b'master'"):
+        GPIO.output(ledKitchen, False)
+        GPIO.output(ledLivingroom, False)
+    if(str(msg.payload) == "b'kitchen'"):
         GPIO.output(ledKitchen, not GPIO.input(ledKitchen))
-        GPIO.output(ledLivingroom, not GPIO.input(ledLivingRoom))
-    if(str(msg.payload) == "kitchen"):
-        GPIO.output(ledKitchen, not GPIO.input(ledKitchen))
-    if(str(msg.payload) == "livingroom"):
+    if(str(msg.payload) == "b'livingroom'"):
         GPIO.output(ledLivingroom, not GPIO.input(ledLivingroom))
  
 def on_publish(mqttc, obj, mid):

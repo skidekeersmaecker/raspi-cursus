@@ -38,7 +38,6 @@ def write(data):
     mqttc.publish("home/groundfloor/kitchen/lights/lightx", str(data), qos=1)
     #mqttc.publish("home/groundfloor/livingroom/lights/lightx", str(data), qos=1)
 
-#def on_connect(mqttc, obj, flags, rc):
 def on_connect(mqttc, obj, rc): 
     print("connected: " + str(rc))
     mqttc.subscribe("home/groundfloor/livingroom/lights/lightx")
@@ -56,8 +55,6 @@ def on_message(mqttc, obj, msg):
  
 def on_publish(mqttc, obj, mid):
     print("mid: " + str(mid))
-    #mqttc.publish("home/groundfloor/kitchen/lights/lightx", str(data), qos=1)
-    #test
 
 GPIO.add_event_detect(buttonMaster, GPIO.FALLING, callback=callMaster, bouncetime=300)
 GPIO.add_event_detect(buttonKitchen, GPIO.FALLING, callback=callKitchen, bouncetime=300)

@@ -1,0 +1,48 @@
+import RPi.GPIO as GPIO
+import time
+
+GPIO.setmode(GPIO.BOARD)
+
+#leds
+ledKitchen = 23
+ledLivingroom = 24
+GPIO.setup(ledKitchen, GPIO.OUT)
+GPIO.output(ledKitchen, False)
+GPIO.setup(ledLivingroom, GPIO.OUT)
+GPIO.output(ledLivingroom, False)
+
+#buttons
+buttonMaster = 11
+buttonKitchen = 13
+buttonLivingroom = 15
+GPIO.setup(buttonMaster, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(buttonKitchen, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(buttonLivingroom, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
+def callMaster(channel):
+    print("called master button")
+
+def callKitchen(channel):
+    print("called kitchen button")
+    GPIO.output(ledKitchen, True)
+
+def callLivingroom(channel):
+    print("called livingroom button")
+    GPIO.output(ledLivingroom, True)
+
+GPIO.add_event_detect(buttonMaster, GPIO.FALLING, callback=callMaster, bouncetime=300)
+GPIO.add_event_detect(buttonKitchen, GPIO.FALLING, callback=callKitchen, bouncetime=300)
+GPIO.add_event_detect(buttonLivingroom, GPIO.FALLING, callback=callLivingroom, bouncetime=300)
+
+def start():
+    print("start")
+
+try:
+   while(True):
+	start()
+	time.sleep(5)
+
+except KeyboardInterrupt:
+    print("exiting program")
+    GPIO.cleanup()
+

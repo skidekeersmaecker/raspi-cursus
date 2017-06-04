@@ -1,11 +1,11 @@
 [Unit]
-Description=andere RPi background
+Description=Labo05 alarmsysteem
 After=multi-user.target
 After=dhcpcp.service
 
 [Service]
 Type=idle
-ExecStart = /usr/bin/python /home/pi/rpip-cursus/labo5/andereRPi.py
+ExecStart = /usr/bin/python /home/pi/Labo05/alarm.py
 
 [Install]
 WantedBy=multi-user.target

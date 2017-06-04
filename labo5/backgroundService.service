@@ -1,0 +1,11 @@
+t]
+Description=Alarm System
+After=multi-user.target
+After=dhcpcp.service
+
+[Service]
+Type=idle
+ExecStart = /usr/bin/python /home/pi/rpip-cursus/labo5/andereRPi.py > /home/pi/rpip-cursus/labo5/logs 2>&1
+
+[Install]
+WantedBy=multi-user.target
